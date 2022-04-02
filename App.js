@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from 'dotenv';
+import  { connectMongo }  from './app/database/Connection.js' 
 
 const app = express();
+
 
 dotenv.config({path: './config.env'})
 
@@ -21,6 +23,7 @@ app.get('/', (req,res) => {
 
 const port = process.env.PORT || 8080
 
-app.listen(port, () => {
+app.listen(port, async () => {
+    await connectMongo();
     console.log("Server is up and running")
-})
+}) 
